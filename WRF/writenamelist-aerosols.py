@@ -10,12 +10,12 @@ ehrs = [0, *([12, 0] * 3)] #must have end of entire sim at beginning
 syrs = [*([2024] * 7)]
 eyrs = [*([2024] * 7)]
 e_we_d01 = 443
-e_we_d02 = 541
+e_we_d02 = 811
 e_sn_d01 = 266
-e_sn_d02 = 706
-i_parent_start_d02 = 155
-j_parent_start_d02 = 118
-merra = False
+e_sn_d02 = 1201
+i_parent_start_d02 = 149
+j_parent_start_d02 = 30
+merra = True
 #! Various physics and chemistry settings must be edited individually below for now. 
 
 for seq, syr, smon, sday, shr, eyr, emon, eday, ehr in zip(seqs, syrs, smons, sdays, shrs, eyrs, emons, edays, ehrs):

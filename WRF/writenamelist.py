@@ -10,11 +10,11 @@ ehrs = [0, *([12, 0] * 24)] #must have end of entire sim at beginning
 syrs = [*([2023] * 49)]
 eyrs = [*([2023] * 49)]
 e_we_d01 = 443
-e_we_d02 = 301
+e_we_d02 = 811
 e_sn_d01 = 266
-e_sn_d02 = 256
-i_parent_start_d02 = 372
-j_parent_start_d02 = 154
+e_sn_d02 = 1201
+i_parent_start_d02 = 149
+j_parent_start_d02 = 30
 merra = False
 #! Various physics and chemistry settings must be edited individually below for now. 
 
