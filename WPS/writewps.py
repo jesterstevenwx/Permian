@@ -100,7 +100,7 @@ with open('wps_ghg.sh','a') as fl:
    fl.write(f"#SBATCH --mail-type=all\n")
    fl.write(f"\n")
    fl.write(f"ln -sf {wps_dir}/*.exe .\n")
-   fl.write(f'ln {wps_dir}/geogrid/GEOGRID.TBL .')
+   fl.write(f'ln {wps_dir}/geogrid/GEOGRID.TBL .\n')
    fl.write(f"ln -sf namelist.wps_geoungrib namelist.wps\n")
    fl.write(f"./geogrid.exe >& geogrid.log\n")
    fl.write(f"\n")
