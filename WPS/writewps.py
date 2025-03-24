@@ -68,7 +68,7 @@ for seq, start_date, end_date in zip(seqs, start_dates, end_dates):
          fl.write(f"truelat2  = {true_lats[1]},\n")
          fl.write(f"stand_lon = {ref[1]},\n")
          fl.write(f"geog_data_path = '/work2/07655/tg869546/stampede3/geog/WPS_GEOG/'\n")
-         fl.write(f"opt_geogrid_tbl_path = '{wps_dir}/geogrid'\n")
+         fl.write(f"opt_geogrid_tbl_path = '{wps_dir}/geogrid/'\n")
          fl.write(f"/\n")
          fl.write(f"\n")
          fl.write(f"&ungrib\n")
