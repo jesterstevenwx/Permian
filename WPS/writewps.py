@@ -21,7 +21,7 @@ chem_dir = '$HOME/work/chem-files'
 vtable = 'Vtable.GFS'
 bc_ic = '<insert path to bc/ic files here>'
 if ungrib_prefix == 'MERRA':
-   days = ["'20240712',", "'20240713',", "'20240714',", "'20240715',"] #! Update for project, must be strings in this format
+   days = ["20240712", "20240713", "20240714", "20240715"] #! Update for project, must be strings in this format
    dates = ["'2024-07-12',", "'2024-07-13',", "'2024-07-14',", "'2024-07-15',"] #! Update for project, must be strings in this format
    ananv_files = [*(f"'MERRA2_400.inst6_3d_ana_Nv.{i}.nc4'," for i in days)]
    ananp_files = [*(f"'MERRA2_400.inst6_3d_ana_Np.{i}.nc4'," for i in days)]
