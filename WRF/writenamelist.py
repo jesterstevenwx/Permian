@@ -43,8 +43,15 @@ for seq, syr, smon, sday, shr, eyr, emon, eday, ehr in zip(seqs, syrs, smons, sd
         fl.write(f'auxinput4_interval                  = 360,360,360,360,360\n')
         fl.write(f'auxinput4_inname                    = "wrflowinp_d<domain>"\n')
         fl.write(f'input_from_file                     = .true.,.true.,.true.,.true.,\n')
-        fl.write(f'history_interval                    = 60, 60, 60, 60,\n')
-        fl.write(f'frames_per_outfile                  = 1,  1,  1,  1,\n')
+        if ndown and isinstance(seq, int):
+            fl.write(f'history_interval                    = 10, 60, 60, 60,\n')
+            fl.write(f'frames_per_outfile                  = 6,  1,  1,  1,\n')
+        elif ndown and isinstance(seq, str):
+            fl.write(f'history_interval                    = 60, 60, 60, 60,\n')
+            fl.write(f'frames_per_outfile                  = 1,  1,  1,  1,\n')
+        else:
+            fl.write(f'history_interval                    = 60, 10, 60, 60,\n')
+            fl.write(f'frames_per_outfile                  = 1,  6,  1,  1,\n')
         if isinstance(seq, str) or seq == 1:
             fl.write(f'restart                             = .false.,\n')
         else:
