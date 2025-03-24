@@ -21,8 +21,8 @@ chem_dir = '$HOME/work/chem-files'
 vtable = 'Vtable.GFS'
 bc_ic = '<insert path to bc/ic files here>'
 if ungrib_prefix == 'MERRA':
-   days = ["'YYYYMMDD',"] #! Update for project, must be strings in this format
-   dates = ["'YYYY-MM-DD',"] #! Update for project, must be strings in this format
+   days = ["'20240712',", "'20240713',", "'20240714',", "'20240715',"] #! Update for project, must be strings in this format
+   dates = ["'2024-07-12',", "'2024-07-13',", "'2024-07-14',", "'2024-07-15',"] #! Update for project, must be strings in this format
    ananv_files = [*(f"'MERRA2_400.inst6_3d_ana_Nv.{i}.nc4'," for i in days)]
    ananp_files = [*(f"'MERRA2_400.inst6_3d_ana_Np.{i}.nc4'," for i in days)]
    slv_files = [*(f"'MERRA2_400.tavg1_2d_slv_Nx.{i}.nc4'," for i in days)]
@@ -107,7 +107,7 @@ with open('wps_ghg.sh','a') as fl:
       fl.write(f"ln -sf {merra_pgm_dir}/*.TBL .\n")
       fl.write(f"ln -sf {merra_pgm_dir}/bin/Debug/* .\n")
       fl.write(f"ln -sf {chem_dir}/merra-aerosols/*.nc4 .\n")
-      fl.write(f"merra2wrf namelist.merra2wrf\n")
+      fl.write(f"merra2wrf namelist.merra2wrf >& merra.log\n")
       fl.write(f"\n")
    else:
       fl.write(f"ln -sf {wps_dir}/link_grib.csh .\n")
