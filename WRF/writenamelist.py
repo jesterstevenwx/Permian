@@ -1,24 +1,29 @@
 #! Script that writes out the namelists for a multi-stage WRF run. Options at the beginning can be edited to the length and details of the simulation
 
-seqs = ['real', *(x for x in range(1,49))] #must contain 'real' at the beginning
-sdays = [20, *(x for x in range(20,32) for _ in (0,1)), *(x for x in range(1,13) for _ in (0,1))] #must contain the start for entire sim at beginning
-edays = [13, 20, *(x for x in range(21,32) for _ in (0,1)), *(x for x in range(1,13) for _ in (0,1)), 13] #must have end of entire sim at beginning
-smons = [*([7] * 25), *([8] * 24)] #must have start of entire sim at beginning
-emons = [8, *([7] * 23), *([8] * 25)] #must have end of entire sim at beginning
-shrs = [0, *([0, 12] * 24)] #must have start of entire sim at beginning
-ehrs = [0, *([12, 0] * 24)] #must have end of entire sim at beginning
-syrs = [*([2023] * 49)]
-eyrs = [*([2023] * 49)]
+seqs = ['real', 'ndown', *(x for x in range(1,7))] #must contain 'real' at the beginning
+sdays = [12, 12, *(x for x in range(12,15) for _ in (0,1))] #must contain the start for entire sim at beginning
+edays = [15, 15, 12, *(x for x in range(13,15) for _ in (0,1)), 15] #must have end of entire sim at beginning
+smons = [*([7] * 8)] #must have start of entire sim at beginning
+emons = [*([7] * 8)] #must have end of entire sim at beginning
+shrs = [0, 0, *([0, 12] * 3)] #must have start of entire sim at beginning
+ehrs = [0, 0, *([12, 0] * 3)] #must have end of entire sim at beginning
+syrs = [*([2024] * 8)]
+eyrs = [*([2024] * 8)]
 e_we_d01 = 443
 e_we_d02 = 811
 e_sn_d01 = 266
 e_sn_d02 = 1201
 i_parent_start_d02 = 149
 j_parent_start_d02 = 30
-merra = False
+merra = True
 aerosols = False
-ndown = False
+ndown = True
 #! Various physics and chemistry settings must be edited individually below for now. 
+
+assert (ndown and 'ndown' in seqs) or not ndown, 'ndown option selected but no ndown sequence. Please fix.'
+assert (len(seqs) == len(sdays) and len(seqs) == len(edays) and len(seqs) == len(smons) and len(seqs) == len(emons) 
+        and len(seqs) == len(shrs) and len(seqs) == len(ehrs) and len(seqs) == len(syrs) and len(seqs) == len(eyrs), 
+        "One or more date lists aren't the same length as sequences. Please fix.")
 
 for seq, syr, smon, sday, shr, eyr, emon, eday, ehr in zip(seqs, syrs, smons, sdays, shrs, eyrs, emons, edays, ehrs):
     with open(f'namelist.input.{f"{seq:02}" if isinstance(seq, int) else seq}','a') as fl:
