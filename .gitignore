@@ -1,0 +1,11 @@
+*.exe
+*.log
+namelist.*
+*.sh
+*.nc
+WPS/*.TBL
+*.nc4
+*.e.*
+*.o.*
+MERRA:*
+WPS/merra2wrf
