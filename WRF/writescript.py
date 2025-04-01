@@ -1,9 +1,9 @@
 ## Script that writes out the submision scripts for a multi-stage WRF run. Options at the beginning can be edited to the length and details of the simulation
 
-seqs = ['real', *(x for x in range(1,49))] # must have 'real' at the beginning
-days = [20, *(x for x in range(20,32) for _ in (0,1)), *(x for x in range(1,13) for _ in (0,1))]
-mons = [*([7] * 25), *([8] * 24)]
-hrs = [0, *([0, 12] * 24)]
+seqs = ['real', *(x for x in range(1,7))] # must have 'real' at the beginning
+days = [12, *(x for x in range(12,15) for _ in (0,1))]
+mons = [*([7] * 7)]
+hrs = [0, *([0, 12] * 3)]
 email = 'steve@belumenus.com'
 queue = 'skx'
 run_time = '48:00:00' #must be in hh:mm:ss format
@@ -14,8 +14,10 @@ met_em_dir = '../WPS'
 chem_dir = '$HOME/work/chem-files'
 moz_dir = '../mozbc'
 aerosols = False
-ndown = False
+ndown = True
 d01_dir = '$SCRATCH/dj-ghg/WRF'
+
+assert len(seqs) == len(days) and len(seqs) == len(mons) and len(seqs) == len(hrs), "One or more date lists aren't the same length as sequences. Please fix."
 
 for seq, mon, day, hr in zip(seqs, mons, days, hrs):
     with open(f'wrf_ghg_{f"{seq:02}" if isinstance(seq, int) else seq}.sh','a') as fl:
@@ -84,7 +86,7 @@ for seq, mon, day, hr in zip(seqs, mons, days, hrs):
                 fl.write(f'\n')
         else:
             fl.write(f'ln -sf namelist.input.{f"{seq:02}" if isinstance(seq, int) else seq} namelist.input\n')
-            if seq > 1:
+            if seq > 1 and not ndown:
                 fl.write(f'ncatted -O -h -a MMINLU,global,m,c,"MODIFIED_IGBP_MODIS_NOAH" wrfrst_d02_2023-{mon:02}-{day:02}_{hr:02}:00:00 wrfrst_d02_2023-{mon:02}-{day:02}_{hr:02}:00:00\n')
             fl.write(f'\n')
             fl.write('ibrun ./wrf.exe >& wrf.log\n')
